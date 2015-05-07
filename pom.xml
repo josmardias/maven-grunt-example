@@ -12,6 +12,7 @@
   </prerequisites>
 
   <build>
+
     <plugins>
 
       <plugin>
@@ -23,22 +24,21 @@
       </plugin>
 
       <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>0.0.24-SNAPSHOT</version>
-        <configuration>
-          <workingDirectory>src/main/frontend</workingDirectory>
-        </configuration>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <version>1.2.1</version>
         <executions>
           <execution>
-            <id>install node and npm</id>
+            <id>install node</id>
+            <phase>generate-resources</phase>
             <goals>
-              <goal>install-node-and-npm</goal>
+              <goal>wget</goal>
             </goals>
             <configuration>
-              <nodeVersion>${node.version}</nodeVersion>
-              <npmVersion>${npm.version}</npmVersion>
-              <!--downloadRoot>${node.downloadRoot}</downloadRoot-->
+              <url>http://nodejs.org/dist/v${node.version}/node-v${node.version}-linux-x64.tar.gz</url>
+              <unpack>true</unpack>
+              <outputDirectory>${project.basedir}/node</outputDirectory>
+              <sha1>${node.sha1}</sha1>
             </configuration>
           </execution>
         </executions>
@@ -48,7 +48,8 @@
   </build>
 
   <properties>
-    <node.version>v0.12.1</node.version>
+    <node.version>0.12.1</node.version>
+    <node.sha1>79880ff2bc95a674bd0701a6dd4ed38f8366db27</node.sha1>
     <npm.version>2.7.3</npm.version>
     <!--node.downloadRoot>http://myproxy.example.org/nodejs/dist/</node.downloadRoot-->
   </properties>

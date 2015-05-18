@@ -49,6 +49,45 @@
         </executions>
       </plugin>
 
+      <!-- Install NPM modules, run Grunt -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <!-- Install NPM modules -->
+          <execution>
+            <id>install-npm-dependencies</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>./node/node-v${node.version}-linux-x64/bin/node</executable>
+              <arguments>
+                <argument>${project.basedir}/node/node-v${node.version}-linux-x64/lib/node_modules/npm/cli.js</argument>
+                <argument>install</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run frontend build</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>./node/node-v${node.version}-linux-x64/bin/node</executable>
+              <arguments>
+                <argument>${project.basedir}/node/node-v${node.version}-linux-x64/lib/node_modules/npm/cli.js</argument>
+                <argument>run</argument>
+                <argument>build</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 

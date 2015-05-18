@@ -1,0 +1,13 @@
+{
+  "name": "maven-grunt-example",
+  "version": "1.0.0",
+  "description": "Dummy package.json",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "grunt"
+  },
+  "dependencies": {
+    "grunt": "^0.4.5"
+  }
+}

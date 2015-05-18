@@ -48,10 +48,8 @@
   </build>
 
   <properties>
-    <node.version>0.12.1</node.version>
-    <node.sha1>79880ff2bc95a674bd0701a6dd4ed38f8366db27</node.sha1>
-    <npm.version>2.7.3</npm.version>
-    <!--node.downloadRoot>http://myproxy.example.org/nodejs/dist/</node.downloadRoot-->
+    <node.version>0.12.3</node.version>
+    <node.sha1>bb07dacb0802386719cf619125546ea483f4eb93</node.sha1>
   </properties>
 
 </project>

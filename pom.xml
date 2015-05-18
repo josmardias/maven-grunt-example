@@ -23,18 +23,21 @@
         </configuration>
       </plugin>
 
+      <!-- Download Node.js and NPM -->
       <plugin>
         <groupId>com.googlecode.maven-download-plugin</groupId>
         <artifactId>download-maven-plugin</artifactId>
         <version>1.2.1</version>
         <executions>
+          <!-- Download Node.js -->
           <execution>
             <id>install node</id>
-            <phase>generate-resources</phase>
+            <phase>initialize</phase>
             <goals>
               <goal>wget</goal>
             </goals>
             <configuration>
+              <!-- linux only -->
               <url>http://nodejs.org/dist/v${node.version}/node-v${node.version}-linux-x64.tar.gz</url>
               <unpack>true</unpack>
               <outputDirectory>${project.basedir}/node</outputDirectory>

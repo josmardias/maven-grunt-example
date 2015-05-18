@@ -104,6 +104,7 @@
         <node.executablePath>${node.downloadPath}/node-v${node.version}-linux-x64/bin/node</node.executablePath>
         <npm.executablePath>${node.downloadPath}/node-v${node.version}-linux-x64/lib/node_modules/npm/cli.js</npm.executablePath>
         <node.downloadUrl>${node.downloadBaseUrl}/v${node.version}/node-v${node.version}-linux-x64.tar.gz</node.downloadUrl>
+        <node.sha1>bb07dacb0802386719cf619125546ea483f4eb93</node.sha1>
       </properties>
     </profile>
   </profiles>
@@ -111,8 +112,7 @@
   <properties>
     <node.downloadBaseUrl>https://nodejs.org/dist</node.downloadBaseUrl>
     <node.downloadPath>${project.basedir}/node</node.downloadPath>
-    <node.version>0.12.3</node.version>
-    <node.sha1>bb07dacb0802386719cf619125546ea483f4eb93</node.sha1>
+    <node.version>0.12.3</node.version><!-- remember to change node.sha1 -->
   </properties>
 
 </project>

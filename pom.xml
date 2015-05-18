@@ -41,7 +41,7 @@
             <configuration>
               <!-- linux only -->
               <url>${node.downloadUrl}</url>
-              <unpack>true</unpack>
+              <unpack>${node.unpack}</unpack>
               <outputDirectory>${node.downloadPath}</outputDirectory>
               <sha1>${node.sha1}</sha1>
             </configuration>
@@ -71,7 +71,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>run frontend build</id>
+            <id>install npm modules</id>
             <phase>generate-resources</phase>
             <goals>
               <goal>exec</goal>
@@ -92,27 +92,52 @@
   </build>
 
   <profiles>
+    <!-- Mac x64 -->
     <profile>
+      <id>mac</id>
       <activation>
         <os>
-          <name>linux</name>
-          <family>unix</family>
+          <family>mac</family>
+          <arch>x86_64</arch>
+        </os>
+      </activation>
+      <properties>
+        <node.executablePath>${node.downloadPath}/node-v${node.version}-darwin-x64/bin/node</node.executablePath>
+        <npm.executablePath>${node.downloadPath}/node-v${node.version}-darwin-x64/lib/node_modules/npm/cli.js</npm.executablePath>
+        <node.downloadUrl>${node.downloadBaseUrl}/v${node.version}/node-v${node.version}-darwin-x64.tar.gz</node.downloadUrl>
+        <node.sha1>ff48b814cdc54a1df10c60a476b2f6833549551a</node.sha1>
+      </properties>
+    </profile>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
           <arch>amd64</arch>
         </os>
       </activation>
       <properties>
-        <node.executablePath>${node.downloadPath}/node-v${node.version}-linux-x64/bin/node</node.executablePath>
-        <npm.executablePath>${node.downloadPath}/node-v${node.version}-linux-x64/lib/node_modules/npm/cli.js</npm.executablePath>
-        <node.downloadUrl>${node.downloadBaseUrl}/v${node.version}/node-v${node.version}-linux-x64.tar.gz</node.downloadUrl>
-        <node.sha1>bb07dacb0802386719cf619125546ea483f4eb93</node.sha1>
+        <node.executablePath>${node.downloadPath}/node.exe</node.executablePath>
+        <npm.executablePath></npm.executablePath>
+        <node.downloadUrl>${node.downloadBaseUrl}/v${node.version}/x64/node.exe</node.downloadUrl>
+        <node.sha1>044c4b67a835ca3873df3844a074230a825aae5f</node.sha1>
+        <node.unpack>false</node.unpack>
       </properties>
     </profile>
   </profiles>
 
   <properties>
+    <!-- linux -->
+    <node.executablePath>${node.downloadPath}/node-v${node.version}-linux-x64/bin/node</node.executablePath>
+    <npm.executablePath>${node.downloadPath}/node-v${node.version}-linux-x64/lib/node_modules/npm/cli.js</npm.executablePath>
+    <node.downloadUrl>${node.downloadBaseUrl}/v${node.version}/node-v${node.version}-linux-x64.tar.gz</node.downloadUrl>
+    <node.unpack>true</node.unpack>
+    <!-- all platforms -->
     <node.downloadBaseUrl>https://nodejs.org/dist</node.downloadBaseUrl>
-    <node.downloadPath>${project.basedir}/node</node.downloadPath>
-    <node.version>0.12.3</node.version><!-- remember to change node.sha1 -->
+    <node.downloadPath>${project.basedir}/node/${node.version}</node.downloadPath>
+    <!-- node version -->
+    <node.version>0.12.3</node.version>
+    <node.sha1>bb07dacb0802386719cf619125546ea483f4eb93</node.sha1><!-- remember to also change windows/mac profiles -->
   </properties>
 
 </project>
